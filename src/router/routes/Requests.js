@@ -9,7 +9,7 @@ function PeopleList({ people }) {
   // TODO: approve, ignore
   return (
     <>
-      <div className="requests list">
+      <div className="requests people-list">
         {people.map(({ username, name }) => (
           <div key={username} className="list-item">
             <div className="list-item-text">

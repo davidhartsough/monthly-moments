@@ -1,1 +1,4 @@
-export const runQuery = (q) => (dispatch) => {};
+// TODO
+export const runQuery = (q) => (dispatch) => {
+  console.log(q);
+};

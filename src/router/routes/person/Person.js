@@ -2,20 +2,14 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchPerson } from "../store/actions/person";
 import Layout from "../../components/Layout";
-import Loader from "../../components/loaders/Loader";
 import Month from "../../components/month";
+import LayoutLoader from "../../../components/loaders/LayoutLoader";
 
 function Person({ username, person, profile, getPerson, month }) {
   useEffect(() => {
     getPerson(username);
   }, [getPerson, username]);
-  if (person.loading) {
-    return (
-      <Layout>
-        <Loader />
-      </Layout>
-    );
-  }
+  if (person.loading) return <LayoutLoader />;
   return (
     <Layout>
       <header>

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Person from "./Person";
 import Layout from "../../components/Layout";
 import Month from "../../components/month";
-import { getCurrentMonth } from "../../../date-utils";
+import { currentMonth, isValidMonth } from "../../../date-utils";
 
 function MyPerson({ month, profile }) {
   return (
@@ -26,12 +26,8 @@ function UsernameCheck({ username, month, profile }) {
 }
 const Enhanced = connect(({ profile }) => ({ profile }))(UsernameCheck);
 
-// TODO
-function isValidMonth(month) {
-  return false;
-}
 export default () => {
   const { id, month } = useParams();
-  const validMonth = isValidMonth(month) ? month : getCurrentMonth();
+  const validMonth = isValidMonth(month) ? month : currentMonth;
   return <Enhanced username={id} month={validMonth} />;
 };

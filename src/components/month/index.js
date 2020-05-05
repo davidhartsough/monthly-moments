@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import MonthPicker from "./MonthPicker";
-import ThisMonth from "./ThisMonth";
+import MyMonth from "./MyMonth";
 import Recap from "./Recap";
-import { isThisMonth } from "../../date-utils";
+import { currentMonth } from "../../date-utils";
 
-export default function Month({ initialMonth, uid, isSelf = false }) {
-  const [month, setMonth] = useState(initialMonth);
+export default function Month({ initialMonth, uid }) {
+  const [month, setMonth] = useState(initialMonth || currentMonth);
+  const isMyProfile = uid === "my profile";
+  const showThisMonth = isMyProfile && month === currentMonth;
   return (
     <div className="month">
-      <MonthPicker month={month} setMonth={setMonth} isSelf={isSelf} />
-      {isSelf && isThisMonth(month) ? (
-        <ThisMonth />
-      ) : (
-        <Recap month={month} uid={uid} />
-      )}
+      <MonthPicker
+        month={month}
+        setMonth={setMonth}
+        isMyProfile={isMyProfile}
+      />
+      {showThisMonth ? <MyMonth /> : <Recap month={month} uid={uid} />}
     </div>
   );
 }

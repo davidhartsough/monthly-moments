@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchThisMonthsMoments } from "../../store/actions/thisMonthsMoments";
 import Fetcher from "../Fetcher";
 import NewMomentForm from "./NewMomentForm";
-import Moment from "./Moment";
+import EditableMoment from "./EditableMoment";
 
 function MyMonth({ loading, data, fetchData }) {
   return (
@@ -11,7 +11,7 @@ function MyMonth({ loading, data, fetchData }) {
       <NewMomentForm />
       <div className="recap">
         {data.length > 0 ? (
-          data.map((m) => <Moment key={m.id} moment={m} />)
+          data.map((m) => <EditableMoment key={m.id} moment={m} />)
         ) : (
           <div className="empty">
             <p>Add to your month</p>

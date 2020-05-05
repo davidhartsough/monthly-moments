@@ -67,7 +67,7 @@ const mapDocs = (doc) => ({
   ...doc.data(),
 });
 
-export function getMyMomentsByMonth(month) {
+export function dbGetMyMomentsByMonth(month) {
   return _db
     .collection("moments")
     .where("uid", "==", _uid)
@@ -75,6 +75,24 @@ export function getMyMomentsByMonth(month) {
     .get()
     .then(({ docs }) => docs.map(mapDocs))
     .catch((e) => console.warn("Error getting current moments: ", e));
+}
+
+export function dbCreateMoment(moment) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(), 500);
+  });
+}
+
+export function dbUpdateMoment(moment) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(), 500);
+  });
+}
+
+export function dbDeleteMoment(moment) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(), 500);
+  });
 }
 
 /*

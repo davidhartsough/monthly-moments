@@ -2,7 +2,6 @@ import { combineReducers } from "redux";
 import auth from "./auth";
 import profile from "./profile";
 import thisMonthsMoments from "./thisMonthsMoments";
-import lastMonthsMoments from "./lastMonthsMoments";
 import person from "./person";
 import recap from "./recap";
 import requests from "./requests";
@@ -12,7 +11,6 @@ const appReducer = combineReducers({
   auth,
   profile,
   thisMonthsMoments,
-  lastMonthsMoments,
   person,
   recap,
   requests,

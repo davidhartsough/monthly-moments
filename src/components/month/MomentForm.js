@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-feather";
 
-const urlPattern = /[A-Za-z]{3}/;
+const urlPattern = /^$|https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
 
 export default function MomentForm({ initialMoment, onSave }) {
   const [links, setLinks] = useState(initialMoment.links);
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
   function onSubmit(data) {
-    console.log(data);
-    onSave();
+    const response = onSave(data);
+    if (response === "clear") {
+      setLinks([]);
+      reset();
+    }
   }
   function addLink() {
     const _links = [...links];

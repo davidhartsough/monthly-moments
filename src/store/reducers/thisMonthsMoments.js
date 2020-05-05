@@ -15,7 +15,7 @@ uid: "david",
 username: "david",
 */
 
-export default function moments(state = initialState, action) {
+export default function thisMonthsMoments(state = initialState, action) {
   switch (action.type) {
     case "stop_loading_moments": {
       return {
