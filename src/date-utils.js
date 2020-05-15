@@ -36,6 +36,7 @@ function getMonthOptions() {
 
 export const monthOptions = getMonthOptions();
 export const currentMonth = `${currentYear}-${currentMonthNumber}`;
+export const lastMonth = monthOptions[monthOptions.length - 2];
 const yearAndMonthPattern = /^20\d{2}-([1-9]|10|11|12)$/;
 export function isValidMonth(yearAndMonth) {
   if (yearAndMonthPattern.test(yearAndMonth)) {
