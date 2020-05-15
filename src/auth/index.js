@@ -5,24 +5,24 @@ import { handleAuthState } from "../store/db/auth";
 import SplashLoader from "../components/loaders/SplashLoader";
 import SignIn from "./SignIn";
 
-function Authenticator({ children, auth, _handleAuth, _setAuthLoading }) {
+function Authenticator({ children, auth, handleUser, keepLoading }) {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    _setAuthLoading();
-    handleAuthState(user => {
+    keepLoading();
+    handleAuthState((user) => {
       setLoading(false);
-      _setAuthLoading();
-      _handleAuth(user);
+      keepLoading();
+      handleUser(user);
     });
-  }, [_setAuthLoading, _handleAuth]);
+  }, [keepLoading, handleUser]);
   if (auth.loading || loading) return <SplashLoader />;
   if (auth.isSignedIn) return children;
   return <SignIn />;
 }
 
-const mapDispatchToProps = dispatch => ({
-  _handleAuth: user => dispatch(handleAuth(user)),
-  _setAuthLoading: () => dispatch(setAuthLoading())
+const mapDispatchToProps = (dispatch) => ({
+  handleUser: (user) => dispatch(handleAuth(user)),
+  keepLoading: () => dispatch(setAuthLoading()),
 });
 
 export default connect(

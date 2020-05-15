@@ -8,7 +8,7 @@ function SearchForm({ submit, loading }) {
   const { register, handleSubmit } = useForm();
   function onSubmit(data) {
     console.log(data);
-    submit(data.search);
+    submit(data.search.trim().toUpperCase());
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="search-form">
@@ -21,8 +21,19 @@ function SearchForm({ submit, loading }) {
           placeholder="Search"
           id="search-input"
           maxLength="120"
+          minLength="2"
           name="search"
-          ref={register}
+          ref={register({
+            required: "Please enter a search.",
+            maxLength: {
+              value: 160,
+              message: "Please use fewer than 160 characters.",
+            },
+            minLength: {
+              value: 2,
+              message: "Please enter at least 2 letters.",
+            },
+          })}
         />
       </div>
       <button type="submit" className="search-button" disabled={loading}>

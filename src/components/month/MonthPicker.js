@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "react-feather";
-import { monthOptions, prevMonthBound } from "../../date-utils";
+import { monthOptions } from "../../date-utils";
+
+const prevMonthBound = monthOptions.length - 1;
 
 export default function MonthPicker({ month, setMonth }) {
   const [monthIndex, setMonthIndex] = useState(0);

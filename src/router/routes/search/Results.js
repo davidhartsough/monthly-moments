@@ -10,7 +10,7 @@ export default function Results({ results }) {
     );
   }
   return (
-    <div className="people-list">
+    <div className="results people-list">
       {results.map(({ username, name }) => (
         <ResultListItem key={username} username={username} name={name} />
       ))}

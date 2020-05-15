@@ -14,11 +14,7 @@ export default function MomentForm({ initialMoment, onSave }) {
       reset();
     }
   }
-  function addLink() {
-    const _links = [...links];
-    _links.push("");
-    setLinks(_links);
-  }
+  const addLink = () => setLinks([...links, ""]);
   return (
     <div className="moment-form">
       <form onSubmit={handleSubmit(onSubmit)}>

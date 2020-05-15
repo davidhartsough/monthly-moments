@@ -34,10 +34,7 @@ export function fetchProfile() {
     .collection("profiles")
     .where("uid", "==", _uid)
     .get()
-    .then(({ docs }) => {
-      const p = docs[0];
-      return p;
-    })
+    .then(({ docs }) => docs[0])
     .catch(console.warn);
 }
 
@@ -60,6 +57,17 @@ function getPerson(id) {
       }
       return doc.data();
     });
+}
+
+export function getPeopleByQuery(query) {
+  return _db
+    .collection("profiles")
+    .where("searchTerms", "array-contains", query)
+    .get()
+    .then(({ docs }) => docs.map(mapDocs))
+    .catch((err) =>
+      console.warn(`Error getting moments by query ("${query}") : `, err)
+    );
 }
 
 const mapDocs = (doc) => ({

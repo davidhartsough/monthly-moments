@@ -6,6 +6,7 @@ import person from "./person";
 import recap from "./recap";
 import requests from "./requests";
 import connections from "./connections";
+import search from "./search";
 
 const appReducer = combineReducers({
   auth,
@@ -15,6 +16,7 @@ const appReducer = combineReducers({
   recap,
   requests,
   connections,
+  search,
 });
 
 const rootReducer = (state, action) => {

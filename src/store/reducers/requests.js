@@ -26,11 +26,11 @@ export default function requests(state = initialState, action) {
         data,
       };
     }
-    case "remove_request": {
-      const { removed } = action.payload;
+    case "delete_request": {
+      const { deleted } = action.payload;
       const data = [...state.data];
       const index = data.findIndex(
-        ({ username }) => username === removed.username
+        ({ username }) => username === deleted.username
       );
       data.splice(index, 1);
       return {

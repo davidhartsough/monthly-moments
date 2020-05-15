@@ -12,7 +12,8 @@ username: "david",
 name: "David Hartsough",
 connections: ["steve"],
 requests: ["alicia"],
-searchTerms: ["DAVID", "HARTSOUGH"],
+requested: ["jen"],
+searchTerms: ["DAVID", "HARTSOUGH", "DAVID HARTSOUGH"],
 */
 
 export default function profile(state = initialState, action) {
@@ -21,7 +22,7 @@ export default function profile(state = initialState, action) {
       const { profile } = action.payload;
       return profile;
     }
-    case "connect": {
+    case "create_profile_connection": {
       const { username } = action.payload;
       const connections = [...state.connections];
       connections.push(username);
@@ -30,7 +31,7 @@ export default function profile(state = initialState, action) {
         connections,
       };
     }
-    case "disconnect": {
+    case "delete_profile_connection": {
       const { username } = action.payload;
       const connection = [...state.connection];
       const index = connection.findIndex((un) => un === username);
@@ -40,7 +41,7 @@ export default function profile(state = initialState, action) {
         connection,
       };
     }
-    case "delete_request": {
+    case "delete_profile_request": {
       const { username } = action.payload;
       const requests = [...state.requests];
       const index = requests.findIndex((un) => un === username);
@@ -50,7 +51,7 @@ export default function profile(state = initialState, action) {
         requests,
       };
     }
-    case "request": {
+    case "create_profile_request": {
       const { username } = action.payload;
       const requested = [...state.requested];
       requested.push(username);
