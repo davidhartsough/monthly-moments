@@ -1,16 +1,17 @@
 import {
-  dbGetMyMomentsByMonth,
-  dbUpdateMoment,
-  dbCreateMoment,
+  getThisMonthsMoments,
+  updateMoment as update,
+  createMoment as create,
 } from "../db/fb";
-import { currentMonth } from "../../date-utils";
 
-const stopLoading = () => ({ type: "stop_loading_moments" });
+const stopLoading = () => ({ type: "stop_loading_this_months_moments" });
 
-const requestMoments = () => ({ type: "request_moments" });
+const requestThisMonthsMoments = () => ({
+  type: "request_this_months_moments",
+});
 
-const receiveMoments = (data) => ({
-  type: "receive_moments",
+const receiveThisMonthsMoments = (data) => ({
+  type: "receive_this_months_moments",
   payload: { data },
 });
 
@@ -24,6 +25,33 @@ const _updateMoment = (updated) => ({
   payload: { updated },
 });
 
+export const fetchThisMonthsMoments = () => (dispatch, getState) => {
+  const { hasFetched } = getState().thisMonthsMoments;
+  if (hasFetched) return dispatch(stopLoading());
+  dispatch(requestThisMonthsMoments());
+  return getThisMonthsMoments().then((data) => {
+    return dispatch(receiveThisMonthsMoments(data));
+  });
+};
+export const createMoment = (created) => (dispatch) => {
+  console.log(created);
+  return new Promise((resolve) => {
+    return create(created).then(() => {
+      return resolve(dispatch(_createMoment(created)));
+    });
+  });
+};
+
+export const updateMoment = (updated) => (dispatch) => {
+  console.log(updated);
+  return new Promise((resolve) => {
+    return update(updated).then(() => {
+      return resolve(dispatch(_updateMoment(updated)));
+    });
+  });
+};
+
+/*
 export const fetchMoments = () => (dispatch, getState) => {
   const { hasFetched } = getState().moments;
   if (hasFetched) return dispatch(stopLoading());
@@ -32,21 +60,4 @@ export const fetchMoments = () => (dispatch, getState) => {
     return dispatch(receiveMoments(data));
   });
 };
-
-export const createMoment = (created) => (dispatch) => {
-  console.log(created);
-  return new Promise((resolve) => {
-    return dbCreateMoment(created).then(() => {
-      return resolve(dispatch(_createMoment(created)));
-    });
-  });
-};
-
-export const updateMoment = (updated) => (dispatch) => {
-  console.log(updated);
-  return new Promise((resolve, reject) => {
-    return dbUpdateMoment(updated).then(() => {
-      return resolve(dispatch(_updateMoment(updated)));
-    });
-  });
-};
+*/

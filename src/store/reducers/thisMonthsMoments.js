@@ -17,19 +17,19 @@ username: "david",
 
 export default function thisMonthsMoments(state = initialState, action) {
   switch (action.type) {
-    case "stop_loading_moments": {
+    case "stop_loading_this_months_moments": {
       return {
         ...state,
         loading: false,
       };
     }
-    case "request_moments": {
+    case "request_this_months_moments": {
       return {
         ...state,
         loading: true,
       };
     }
-    case "receive_moments": {
+    case "receive_this_months_moments": {
       const { data } = action.payload;
       return {
         loading: false,

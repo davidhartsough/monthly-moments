@@ -12,7 +12,7 @@ function EditableMoment({ moment, saveChanges }) {
   const toggle = () => setEditing(!editing);
   function onSave(updated) {
     setLoading(true);
-    saveChanges(updated).then(() => {
+    saveChanges(moment.id, updated).then(() => {
       toggle();
       setLoading(false);
     });
@@ -34,6 +34,6 @@ function EditableMoment({ moment, saveChanges }) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  saveChanges: (moment) => dispatch(updateMoment(moment)),
+  saveChanges: (id, moment) => dispatch(updateMoment(id, moment)),
 });
 export default connect(null, mapDispatchToProps)(EditableMoment);

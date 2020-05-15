@@ -7,6 +7,12 @@ const initialState = {
 
 export default function person(state = initialState, action) {
   switch (action.type) {
+    case "stop_loading_person": {
+      return {
+        ...state,
+        loading: false,
+      };
+    }
     case "request_person": {
       return {
         ...state,
