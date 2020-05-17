@@ -1,39 +1,57 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { updateMoment } from "../store/actions/thisMonthsMoments";
+import {
+  updateMoment,
+  deleteMoment,
+} from "../../store/actions/thisMonthsMoments";
 import { Edit } from "react-feather";
 import MomentForm from "./MomentForm";
 import Moment from "./Moment";
 import Loader from "../loaders/Loader";
 
-function EditableMoment({ moment, saveChanges }) {
+function EditableMoment({ moment, saveChanges, removeMoment }) {
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [deleted, setDeleted] = useState(false);
   const toggle = () => setEditing(!editing);
-  function onSave(updated) {
+  function onSave(text) {
+    if (text === moment.text) return toggle();
     setLoading(true);
-    saveChanges(moment.id, updated).then(() => {
+    saveChanges(moment.id, text).then(() => {
       toggle();
       setLoading(false);
     });
   }
+  function handleDelete() {
+    removeMoment(moment.id);
+    setDeleted(true);
+  }
+  if (deleted) return null;
   return (
     <div className="editable-moment">
       {loading ? (
         <Loader />
       ) : editing ? (
-        <MomentForm initialMoment={moment} onSave={onSave} />
+        <MomentForm
+          initialMoment={moment}
+          onSave={onSave}
+          onDelete={handleDelete}
+        />
       ) : (
-        <Moment moment={moment} />
+        <>
+          <Moment moment={moment} />
+
+          <div className="open-menu" onClick={toggle}>
+            <Edit size={16} />
+          </div>
+        </>
       )}
-      <div className="edit-button" onClick={toggle}>
-        <Edit />
-      </div>
     </div>
   );
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  saveChanges: (id, moment) => dispatch(updateMoment(id, moment)),
+  saveChanges: (id, text) => dispatch(updateMoment(id, text)),
+  removeMoment: (id) => dispatch(deleteMoment(id)),
 });
 export default connect(null, mapDispatchToProps)(EditableMoment);

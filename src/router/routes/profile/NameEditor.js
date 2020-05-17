@@ -1,41 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { changeName } from "../store/actions/profile";
-import { useForm } from "react-hook-form";
+import { changeName } from "../../../store/actions/profile";
 
 function NameEditor({ close, profile, submit }) {
-  const { register, handleSubmit } = useForm();
-  function onSubmit(data) {
-    console.log(data);
-    submit(data.name).then(close);
+  const [name, setName] = useState(profile.name);
+  const onChange = ({ target }) => setName(target.value);
+  function onSubmit(e) {
+    e.preventDefault();
+    const submission = name.trim();
+    if (submission.length > 1) {
+      if (submission !== profile.name) submit(submission);
+      close();
+    }
   }
+  const dontClose = (e) => e.stopPropagation();
   return (
-    <div className="edit-name">
-      <form onSubmit={handleSubmit(onSubmit)} className="name-form">
-        <label for="name-input">Name</label>
-        <input
-          type="text"
-          placeholder="Name"
-          id="name-input"
-          maxLength="160"
-          minLength="2"
-          name="name"
-          autoFocus
-          defaultValue={profile.name}
-          ref={register({
-            required: "Please enter a search.",
-            maxLength: {
-              value: 160,
-              message: "Please use less than 160 characters.",
-            },
-            minLength: {
-              value: 2,
-              message: "Please enter at least 2 letters.",
-            },
-          })}
-        />
-        <button type="submit">Save</button>
-      </form>
+    <div className="modal-bg" onClick={close}>
+      <div className="name-editor" onClick={dontClose}>
+        <form onSubmit={onSubmit} className="name-form">
+          <label>
+            Name
+            <input
+              type="text"
+              placeholder="Name"
+              id="name-input"
+              maxLength="100"
+              minLength="2"
+              autoFocus
+              onChange={onChange}
+              value={name}
+            />
+          </label>
+          <div className="form-actions">
+            <button
+              type="submit"
+              className="primary"
+              disabled={name.trim().length < 2 || name.length > 100}
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

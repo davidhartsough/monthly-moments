@@ -1,15 +1,16 @@
 import React from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import Splash from "../components/Splash";
 import { signInOptions, auth } from "../store/db/fb";
-import "./SignIn.css";
 
 export default function SignIn() {
   return (
-    <Splash>
-      <h1 id="app-title">Monthly Moments</h1>
-      <h2 id="sign-in-title">Sign in</h2>
-      <div id="sign-in">
+    <section>
+      <header>
+        <div className="header-text">
+          <h1 className="sign-in-title">Monthly Moments</h1>
+        </div>
+      </header>
+      <div id="sign-in-options">
         <StyledFirebaseAuth
           uiConfig={{
             signInSuccessUrl: "/",
@@ -18,6 +19,6 @@ export default function SignIn() {
           firebaseAuth={auth()}
         />
       </div>
-    </Splash>
+    </section>
   );
 }

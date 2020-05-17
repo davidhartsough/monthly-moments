@@ -1,18 +1,21 @@
 const initialState = {
   name: "",
-  username: "",
+  username: null,
   connections: [],
   requests: [],
   requested: [],
+  ignored: [],
+  uid: null,
 };
 
 /*
-uid: "david",
+uid: "asdf1234",
 username: "david",
 name: "David Hartsough",
 connections: ["steve"],
 requests: ["alicia"],
 requested: ["jen"],
+ignored: ["alicia"],
 searchTerms: ["DAVID", "HARTSOUGH", "DAVID HARTSOUGH"],
 */
 
@@ -58,6 +61,32 @@ export default function profile(state = initialState, action) {
       return {
         ...state,
         requested,
+      };
+    }
+    case "create_profile_ignore": {
+      const { username } = action.payload;
+      const ignored = [...state.ignored];
+      ignored.push(username);
+      return {
+        ...state,
+        ignored,
+      };
+    }
+    case "delete_profile_ignore": {
+      const { username } = action.payload;
+      const ignored = [...state.ignored];
+      const index = ignored.findIndex((un) => un === username);
+      if (index !== -1) ignored.splice(index, 1);
+      return {
+        ...state,
+        ignored,
+      };
+    }
+    case "set_profile_name": {
+      const { name } = action.payload;
+      return {
+        ...state,
+        name,
       };
     }
     default:

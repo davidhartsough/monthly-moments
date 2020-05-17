@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Layout from "../../components/Layout";
-import Fetcher from "../../components/Fetcher";
+import Layout from "../../../components/Layout";
+import Fetcher from "../../../components/Fetcher";
 import PeopleList from "./PeopleList";
 
 export default function Home({ data, loading, fetchData }) {

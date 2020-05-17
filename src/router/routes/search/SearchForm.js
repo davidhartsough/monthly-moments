@@ -4,30 +4,25 @@ import { runQuery } from "../../../store/actions/search";
 import { Search as SearchIcon } from "react-feather";
 import { useForm } from "react-hook-form";
 
-function SearchForm({ submit, loading }) {
+function SearchForm({ submit, query, loading }) {
   const { register, handleSubmit } = useForm();
-  function onSubmit(data) {
-    console.log(data);
-    submit(data.search.trim().toUpperCase());
-  }
+  const onSubmit = (data) => submit(data.search.trim().toUpperCase());
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="search-form">
-      <div className="search-bar">
-        <div className="icon-prefix">
-          <SearchIcon size={20} />
-        </div>
+      <label className="search">
+        <SearchIcon size={20} className="search-icon" />
         <input
           type="search"
           placeholder="Search"
           id="search-input"
-          maxLength="120"
+          maxLength="100"
           minLength="2"
           name="search"
+          defaultValue={query}
           ref={register({
-            required: "Please enter a search.",
             maxLength: {
-              value: 160,
-              message: "Please use fewer than 160 characters.",
+              value: 100,
+              message: "Please use fewer than 100 characters.",
             },
             minLength: {
               value: 2,
@@ -35,8 +30,13 @@ function SearchForm({ submit, loading }) {
             },
           })}
         />
-      </div>
-      <button type="submit" className="search-button" disabled={loading}>
+      </label>
+      <button
+        type="submit"
+        hidden
+        className="search-button hide"
+        disabled={loading}
+      >
         Search
       </button>
     </form>

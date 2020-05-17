@@ -27,11 +27,9 @@ export default function requests(state = initialState, action) {
       };
     }
     case "delete_request": {
-      const { deleted } = action.payload;
+      const { username } = action.payload;
       const data = [...state.data];
-      const index = data.findIndex(
-        ({ username }) => username === deleted.username
-      );
+      const index = data.findIndex((p) => p.username === username);
       data.splice(index, 1);
       return {
         loading: false,

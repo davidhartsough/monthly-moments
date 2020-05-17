@@ -9,15 +9,13 @@ function MyMonth({ loading, data, fetchData }) {
   return (
     <Fetcher fetchData={fetchData} loading={loading}>
       <NewMomentForm />
-      <div className="recap">
-        {data.length > 0 ? (
-          data.map((m) => <EditableMoment key={m.id} moment={m} />)
-        ) : (
-          <div className="empty">
-            <p>Add to your month</p>
-          </div>
-        )}
-      </div>
+      {data.length > 0 && (
+        <div className="recap">
+          {data.map((m) => (
+            <EditableMoment key={m.id} moment={m} />
+          ))}
+        </div>
+      )}
     </Fetcher>
   );
 }

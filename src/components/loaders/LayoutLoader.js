@@ -4,6 +4,6 @@ import Layout from "../Layout";
 
 export default () => (
   <Layout>
-    <Loader />
+    <Loader size={5} />
   </Layout>
 );

@@ -20,7 +20,7 @@ export default function person(state = initialState, action) {
       };
     }
     case "receive_person": {
-      const { name, username, uid } = action.payload;
+      const { name, username, uid } = action.payload.data;
       return {
         loading: false,
         name,

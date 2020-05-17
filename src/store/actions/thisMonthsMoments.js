@@ -1,7 +1,8 @@
 import {
   getThisMonthsMoments,
-  updateMoment as update,
-  createMoment as create,
+  updateMoment as dbUpdate,
+  createMoment as dbCreate,
+  deleteMoment as dbDelete,
 } from "../db/fb";
 
 const stopLoading = () => ({ type: "stop_loading_this_months_moments" });
@@ -20,9 +21,14 @@ const _createMoment = (created) => ({
   payload: { created },
 });
 
-const _updateMoment = (updated) => ({
+const _updateMoment = (id, text) => ({
   type: "update_moment",
-  payload: { updated },
+  payload: { id, text },
+});
+
+const _deleteMoment = (id) => ({
+  type: "delete_moment",
+  payload: { id },
 });
 
 export const fetchThisMonthsMoments = () => (dispatch, getState) => {
@@ -33,31 +39,33 @@ export const fetchThisMonthsMoments = () => (dispatch, getState) => {
     return dispatch(receiveThisMonthsMoments(data));
   });
 };
-export const createMoment = (created) => (dispatch) => {
-  console.log(created);
-  return new Promise((resolve) => {
-    return create(created).then(() => {
-      return resolve(dispatch(_createMoment(created)));
-    });
+
+export const createMoment = (text) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    return dbCreate(text)
+      .then((newMoment) => {
+        return resolve(dispatch(_createMoment(newMoment)));
+      })
+      .catch(reject);
   });
 };
 
-export const updateMoment = (updated) => (dispatch) => {
-  console.log(updated);
-  return new Promise((resolve) => {
-    return update(updated).then(() => {
-      return resolve(dispatch(_updateMoment(updated)));
-    });
+export const updateMoment = (id, text) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    return dbUpdate(id, { text })
+      .then(() => {
+        return resolve(dispatch(_updateMoment(id, text)));
+      })
+      .catch(reject);
   });
 };
 
-/*
-export const fetchMoments = () => (dispatch, getState) => {
-  const { hasFetched } = getState().moments;
-  if (hasFetched) return dispatch(stopLoading());
-  dispatch(requestMoments());
-  return dbGetMyMomentsByMonth(currentMonth).then((data) => {
-    return dispatch(receiveMoments(data));
+export const deleteMoment = (id) => (dispatch) => {
+  return new Promise((resolve, reject) => {
+    return dbDelete(id)
+      .then(() => {
+        return resolve(dispatch(_deleteMoment(id)));
+      })
+      .catch(reject);
   });
 };
-*/

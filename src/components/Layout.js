@@ -1,21 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Search, User, Home } from "react-feather";
 
-// TODO get logo image
 export default function Layout({ children }) {
   return (
     <>
       <nav>
-        <Link to="/" className="nav-link">
-          <Home />
-        </Link>
-        <Link to="/search" className="nav-link">
-          <Search />
-        </Link>
-        <Link to="/profile" className="nav-link">
-          <User />
-        </Link>
+        <div className="nav-links">
+          <NavLink to="/" exact className="nav-link">
+            <Home />
+          </NavLink>
+          <NavLink to="/search" className="nav-link">
+            <Search />
+          </NavLink>
+          <NavLink to="/profile" className="nav-link">
+            <User />
+          </NavLink>
+        </div>
       </nav>
       <section>{children}</section>
     </>

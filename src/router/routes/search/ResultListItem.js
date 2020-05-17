@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { acceptRequest, createRequest } from "../../../store/actions/general";
 import { Link } from "react-router-dom";
+import Loader from "../../../components/loaders/Loader";
 
 function ResultListItem({
   username,
@@ -11,16 +12,26 @@ function ResultListItem({
   requests,
   accept,
   request,
+  myUsername,
 }) {
-  if (connections.includes(username)) {
+  const [loading, setLoading] = useState(false);
+  if (connections.includes(username) || myUsername === username) {
     return (
-      <div className="list-item">
-        <Link to={`/p/${username}`} className="list-item-text">
+      <Link to={`/p/${username}`} className="list-item">
+        <div className="list-item-text">
           <p className="p-name">{name}</p>
           <p className="p-username">{username}</p>
-        </Link>
-      </div>
+        </div>
+      </Link>
     );
+  }
+  function onAccept() {
+    setLoading(true);
+    accept(username).then(() => setLoading(false));
+  }
+  function onRequest() {
+    setLoading(true);
+    request(username).then(() => setLoading(false));
   }
   return (
     <div className="list-item">
@@ -29,12 +40,18 @@ function ResultListItem({
         <p className="p-username">{username}</p>
       </div>
       <div className="list-item-actions">
-        {requested.includes(username) ? (
-          <button disabled>Request Pending</button>
+        {loading ? (
+          <Loader size={2} marginTop={0} />
+        ) : requested.includes(username) ? (
+          <button disabled>
+            <span className="extra-text">Request </span>Pending
+          </button>
         ) : requests.includes(username) ? (
-          <button onClick={() => accept(username)}>Accept Request</button>
+          <button onClick={onAccept}>
+            Accept<span className="extra-text"> Request</span>
+          </button>
         ) : (
-          <button onClick={() => request(username)}>Connect</button>
+          <button onClick={onRequest}>Connect</button>
         )}
       </div>
     </div>
@@ -42,11 +59,12 @@ function ResultListItem({
 }
 
 const mapStateToProps = ({
-  profile: { connections, requested, requests },
+  profile: { connections, requested, requests, username },
 }) => ({
   connections,
   requested,
   requests,
+  myUsername: username,
 });
 const mapDispatchToProps = (dispatch) => ({
   accept: (username) => dispatch(acceptRequest(username)),

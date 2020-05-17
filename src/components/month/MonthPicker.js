@@ -1,31 +1,42 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "react-feather";
-import { monthOptions } from "../../date-utils";
+import { useHistory } from "react-router-dom";
+import "./MonthPicker.css";
 
-const prevMonthBound = monthOptions.length - 1;
-
-export default function MonthPicker({ month, setMonth }) {
-  const [monthIndex, setMonthIndex] = useState(0);
+export default function MonthPicker({
+  month,
+  setMonth,
+  monthOptions,
+  urlBase,
+  isMyProfile,
+}) {
+  const history = useHistory();
+  const [monthIndex, setMonthIndex] = useState(
+    monthOptions.findIndex((m) => m.value === month)
+  );
   function handleMonthChange({ target }) {
     const { value } = target;
     setMonth(value);
     setMonthIndex(monthOptions.findIndex((m) => m.value === value));
+    if (!isMyProfile) history.push(`${urlBase}/${value}`);
   }
   function goToPrevMonth() {
-    const newMonthIndex = monthIndex + 1;
-    setMonthIndex(newMonthIndex);
-    const newMonth = monthOptions[newMonthIndex].value;
-    setMonth(newMonth);
+    const prevMonthIndex = monthIndex + 1;
+    const prevMonth = monthOptions[prevMonthIndex].value;
+    setMonthIndex(prevMonthIndex);
+    setMonth(prevMonth);
+    if (!isMyProfile) history.push(`${urlBase}/${prevMonth}`);
   }
   function goToNextMonth() {
-    const newMonthIndex = monthIndex - 1;
-    setMonthIndex(newMonthIndex);
-    const newMonth = monthOptions[newMonthIndex].value;
-    setMonth(newMonth);
+    const nextMonthIndex = monthIndex - 1;
+    const nextMonth = monthOptions[nextMonthIndex].value;
+    setMonthIndex(nextMonthIndex);
+    setMonth(nextMonth);
+    if (!isMyProfile) history.push(`${urlBase}/${nextMonth}`);
   }
   return (
     <div className="month-picker">
-      {monthIndex !== prevMonthBound ? (
+      {monthIndex !== monthOptions.length - 1 ? (
         <div onClick={goToPrevMonth} className="month-nav">
           <ChevronLeft />
         </div>

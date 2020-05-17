@@ -17,10 +17,10 @@ export default () => (
       <Route path="/requests">
         <Requests />
       </Route>
-      <Route path="/p/:id">
+      <Route path="/p/:id/:month">
         <Person />
       </Route>
-      <Route path="/p/:id/:month">
+      <Route path="/p/:id">
         <Person />
       </Route>
       <Route path="*">

@@ -13,7 +13,10 @@ export const fetchRequests = () => (dispatch, getState) => {
   const { hasFetched } = getState().requests;
   if (hasFetched) return dispatch(stopLoading());
   dispatch(requestRequests());
-  const usernames = getState().profile.requests;
+  const { profile } = getState();
+  const usernames = profile.requests.filter(
+    (i) => !profile.ignored.includes(i)
+  );
   return getPeople(usernames).then((data) => {
     return dispatch(receiveRequests(data));
   });

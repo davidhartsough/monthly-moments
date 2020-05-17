@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { createMoment } from "../store/actions/thisMonthsMoments";
+import { createMoment } from "../../store/actions/thisMonthsMoments";
 import MomentForm from "./MomentForm";
 import Loader from "../loaders/Loader";
 
 function NewMomentForm({ saveNewMoment }) {
   const [loading, setLoading] = useState(false);
-  function onSave(moment) {
+  function onSave(text) {
     setLoading(true);
-    saveNewMoment(moment).then(() => {
+    saveNewMoment(text).then(() => {
       setLoading(false);
     });
     return "clear";
   }
   return (
     <div className="new-moment">
+      <p className="subheading">Add to your month</p>
       {loading ? (
         <Loader />
       ) : (
@@ -22,7 +23,6 @@ function NewMomentForm({ saveNewMoment }) {
           initialMoment={{
             id: false,
             text: "",
-            links: [],
           }}
           onSave={onSave}
         />
@@ -32,6 +32,6 @@ function NewMomentForm({ saveNewMoment }) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  saveNewMoment: (moment) => dispatch(createMoment(moment)),
+  saveNewMoment: (text) => dispatch(createMoment(text)),
 });
 export default connect(null, mapDispatchToProps)(NewMomentForm);

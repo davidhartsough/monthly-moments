@@ -1,61 +1,35 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-feather";
 
-const urlPattern = /^$|https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
-
-export default function MomentForm({ initialMoment, onSave }) {
-  const [links, setLinks] = useState(initialMoment.links);
-  const { register, handleSubmit, errors, reset } = useForm();
-  function onSubmit(data) {
-    const response = onSave(data);
-    if (response === "clear") {
-      setLinks([]);
-      reset();
-    }
+export default function MomentForm({ initialMoment, onSave, onDelete = null }) {
+  const [text, setText] = useState(initialMoment.text);
+  const onChange = ({ target }) => setText(target.value);
+  function submit() {
+    const response = onSave(text.trim());
+    if (response === "clear") setText("");
   }
-  const addLink = () => setLinks([...links, ""]);
   return (
     <div className="moment-form">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <textarea
-          name="text"
-          defaultValue={initialMoment.text}
-          ref={register({
-            required: "This cannot be empty.",
-            maxLength: {
-              value: 600,
-              message: "Please use fewer than 600 characters.",
-            },
-          })}
-        />
-        {errors.text?.message}
-        <div className="link-list">
-          {links.map((link, index) => (
-            <div key={`${index}-${link}`} className="link-item">
-              <Link />
-              <input
-                type="url"
-                className="link-input"
-                defaultValue={link}
-                name={`links[${index}]`}
-                ref={register({
-                  pattern: {
-                    value: urlPattern,
-                    message: "This must be a valid URL.",
-                  },
-                })}
-              />
-              {errors[`links[${index}]`]?.message}
-            </div>
-          ))}
-          {links.length < 5 && <button onClick={addLink}>Add a link</button>}
-        </div>
-        <div className="form-actions">
-          {initialMoment.id && <button>Delete</button>}
-          <button type="submit">Save</button>
-        </div>
-      </form>
+      <textarea
+        name="text"
+        value={text}
+        onChange={onChange}
+        placeholder="Share a moment from this month"
+        maxLength="480"
+        minLength="2"
+      />
+      <div className="form-actions">
+        {initialMoment.id && text.trim().length === 0 ? (
+          <button onClick={onDelete}>Delete</button>
+        ) : (
+          <button
+            onClick={submit}
+            className="primary"
+            disabled={text.trim().length < 3 || text.length > 480}
+          >
+            {initialMoment.id ? "Save" : "Add"}
+          </button>
+        )}
+      </div>
     </div>
   );
 }

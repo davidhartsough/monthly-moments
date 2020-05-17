@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { fetchConnections } from "../store/actions/connections";
+import { fetchConnections } from "../../../store/actions/connections";
 import Home from "./Home";
 
 const mapStateToProps = ({ connections: { loading, data } }) => ({

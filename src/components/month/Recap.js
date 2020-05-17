@@ -14,7 +14,7 @@ function Recap({ month, uid, recap, getRecap }) {
   useEffect(() => {
     getRecap(month, uid);
   }, [getRecap, month, uid]);
-  if (recap.loading) return <Loader />;
+  if (recap.loading) return <Loader size={2} />;
   if (recap.moments.length < 1) return <Empty />;
   return (
     <div className="recap">

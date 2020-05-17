@@ -5,12 +5,8 @@ const initialState = {
 };
 
 /*
-links: [
-  "https://moments-memories.web.app/",
-  "https://play.google.com/store/apps/details?id=com.davidhartsough.moments"
-],
 month: "2020-3",
-text: "Worked on the Moments app",
+text: "Worked on the Moments app. Check out the web app https://moments-memories.web.app/ and the Android app https://play.google.com/store/apps/details?id=com.davidhartsough.moments",
 uid: "david",
 username: "david",
 */
@@ -48,10 +44,12 @@ export default function thisMonthsMoments(state = initialState, action) {
       };
     }
     case "update_moment": {
-      const { updated } = action.payload;
+      const { id, text } = action.payload;
       const data = [...state.data];
-      const index = data.findIndex(({ id }) => id === updated.id);
-      data[index] = updated;
+      const index = data.findIndex((m) => m.id === id);
+      const moment = data[index];
+      moment.text = text;
+      data[index] = moment;
       return {
         ...state,
         loading: false,
@@ -59,9 +57,9 @@ export default function thisMonthsMoments(state = initialState, action) {
       };
     }
     case "delete_moment": {
-      const { deleted } = action.payload;
+      const { id } = action.payload;
       const data = [...state.data];
-      const index = data.findIndex(({ id }) => id === deleted.id);
+      const index = data.findIndex((m) => m.id === id);
       data.splice(index, 1);
       return {
         ...state,

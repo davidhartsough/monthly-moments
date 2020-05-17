@@ -4,6 +4,6 @@ import Splash from "../Splash";
 
 export default () => (
   <Splash>
-    <Loader />
+    <Loader size={5} marginTop={-12} />
   </Splash>
 );

@@ -4,6 +4,7 @@ import { handleAuth, setAuthLoading } from "../store/actions/auth";
 import { handleAuthState } from "../store/db/auth";
 import SplashLoader from "../components/loaders/SplashLoader";
 import SignIn from "./SignIn";
+import CreateProfile from "./CreateProfile";
 
 function Authenticator({ children, auth, handleUser, keepLoading }) {
   const [loading, setLoading] = useState(true);
@@ -16,7 +17,17 @@ function Authenticator({ children, auth, handleUser, keepLoading }) {
     });
   }, [keepLoading, handleUser]);
   if (auth.loading || loading) return <SplashLoader />;
-  if (auth.isSignedIn) return children;
+  if (auth.isSignedIn) {
+    if (!auth.hasProfile) {
+      return (
+        <CreateProfile
+          displayName={auth.displayName}
+          suggestion={auth.suggestion}
+        />
+      );
+    }
+    return children;
+  }
   return <SignIn />;
 }
 
@@ -24,7 +35,6 @@ const mapDispatchToProps = (dispatch) => ({
   handleUser: (user) => dispatch(handleAuth(user)),
   keepLoading: () => dispatch(setAuthLoading()),
 });
-
 export default connect(
   ({ auth }) => ({ auth }),
   mapDispatchToProps

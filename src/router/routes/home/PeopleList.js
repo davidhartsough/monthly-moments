@@ -16,34 +16,33 @@ export default function PeopleList({ data }) {
       );
     }
     setListItems(people);
-    setSearch(query);
+    setSearch(target.value);
   }
   return (
     <>
       {data.length > 10 && (
-        <div className="search-bar">
-          <div className="icon-prefix">
-            <Search size={20} />
-          </div>
+        <label className="search">
+          <Search size={20} className="search-icon" />
           <input
             type="search"
             placeholder="Search"
-            id="search-input"
-            maxLength="120"
+            id="filter-input"
+            maxLength="100"
+            minLength="2"
             value={search}
             onChange={handleSearch}
           />
-        </div>
+        </label>
       )}
-      <div className="connections people-list">
+      <div className="connections people-list list">
         {listItems.length > 0 ? (
           listItems.map(({ username, name }) => (
-            <div key={username} className="list-item">
-              <Link to={`/p/${username}`} className="list-item-text">
+            <Link to={`/p/${username}`} key={username} className="list-item">
+              <div className="list-item-text">
                 <p className="p-name">{name}</p>
                 <p className="p-username">{username}</p>
-              </Link>
-            </div>
+              </div>
+            </Link>
           ))
         ) : (
           <div className="empty">
