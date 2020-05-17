@@ -36,8 +36,12 @@ export default function PeopleList({ data }) {
       )}
       <div className="connections people-list list">
         {listItems.length > 0 ? (
-          listItems.map(({ username, name }) => (
-            <Link to={`/p/${username}`} key={username} className="list-item">
+          listItems.map(({ username, name }, i) => (
+            <Link
+              to={`/p/${username}`}
+              key={`${username}-${name}-${i}`}
+              className="list-item"
+            >
               <div className="list-item-text">
                 <p className="p-name">{name}</p>
                 <p className="p-username">{username}</p>
