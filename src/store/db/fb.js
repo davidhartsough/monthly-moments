@@ -141,9 +141,10 @@ export function getThisMonthsMoments() {
 }
 
 export function getRecap(month, uid) {
+  const auid = uid === "my profile" ? _uid : uid;
   return _db
     .collection("moments")
-    .where("uid", "==", uid)
+    .where("uid", "==", auid)
     .where("month", "==", month)
     .get()
     .then(({ docs }) => docs.map(mapDocs))
@@ -283,10 +284,7 @@ function completeConnection(id) {
 export function acceptRequest(id) {
   return new Promise((resolve, reject) => {
     return Promise.all([addToMyConnections(id), completeConnection(id)])
-      .then((res) => {
-        console.log(res);
-        return resolve(res);
-      })
+      .then(([_, person]) => resolve(person))
       .catch(reject);
   });
 }
