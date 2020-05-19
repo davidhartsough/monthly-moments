@@ -5,6 +5,7 @@ import { MoreVertical } from "react-feather";
 import NameEditor from "./NameEditor";
 import { Modal, ModalMenu } from "../../../components/modal";
 import "./MoreMenu.css";
+import { toggleTheme, getTheme } from "../../../theme";
 
 function MoreMenu({ logOut }) {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -27,7 +28,10 @@ function MoreMenu({ logOut }) {
           <ModalMenu
             options={[
               { title: "Edit name", onClick: openEditor },
-              { title: "Enable dark mode (coming soon)", onClick: closeMenu },
+              {
+                title: `${getTheme() === "dark" ? "Dis" : "En"}able dark mode`,
+                onClick: toggleTheme,
+              },
               { title: "Sign out", onClick: logOut },
             ]}
           />

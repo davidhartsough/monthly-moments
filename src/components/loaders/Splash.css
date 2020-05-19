@@ -8,6 +8,10 @@
   height: 100%;
   text-align: center;
 }
+.dark .splash .loader {
+  border: 0.125rem solid #fff;
+  border-top: 0.125rem solid hsl(214, 6%, 60%);
+}
 #logo {
   max-width: 6rem;
 }

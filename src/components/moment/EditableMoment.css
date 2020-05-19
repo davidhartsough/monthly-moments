@@ -14,3 +14,9 @@
   cursor: pointer;
   border-radius: 100%;
 }
+.toggle-edit:hover {
+  background-color: #eee;
+}
+.dark .toggle-edit:hover {
+  background-color: hsl(214, 6%, 25%);
+}

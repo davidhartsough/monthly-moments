@@ -7,3 +7,6 @@
 .more-menu:hover {
   background-color: #eee;
 }
+.dark .more-menu:hover {
+  background-color: hsl(214, 6%, 25%);
+}

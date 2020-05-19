@@ -13,6 +13,9 @@
   margin: 0;
   color: #777;
 }
+.dark .search-icon {
+  color: hsl(214, 6%, 64%);
+}
 input[type="search"] {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -27,9 +30,19 @@ input[type="search"] {
   font-size: 1rem;
   padding: 0.5rem 0.5rem 0.5rem 2rem;
 }
+.dark input[type="search"] {
+  background-color: transparent;
+  border-color: hsl(214, 5%, 40%);
+}
 input[type="search"]:hover {
   border-color: #aaa;
 }
+.dark input[type="search"]:hover {
+  border-color: hsl(214, 8%, 50%);
+}
 input[type="search"]:focus {
   border-color: #999;
+}
+.dark input[type="search"]:focus {
+  border-color: hsl(214, 12%, 60%);
 }

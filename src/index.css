@@ -21,3 +21,7 @@ body {
   font-kerning: normal;
   line-height: 1.5;
 }
+body.dark {
+  background-color: hsl(214, 6%, 12%);
+  color: hsl(214, 12%, 92%);
+}

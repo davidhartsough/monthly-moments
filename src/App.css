@@ -21,14 +21,24 @@ h2 {
   font-weight: bold;
   color: #444;
 }
+.dark h2 {
+  color: hsl(214, 6%, 64%);
+}
 hr {
   margin: 1rem 0;
   border: 0;
   border-top: 1px solid #ccc;
 }
+.dark hr {
+  border-color: hsl(214, 5%, 40%);
+}
 a {
   text-decoration: none;
   color: #1471eb;
+  outline: none;
+}
+.dark a {
+  color: hsl(214, 100%, 64%);
 }
 .button,
 button {
@@ -40,8 +50,8 @@ button {
   letter-spacing: 0.0125rem;
   padding: 0.35rem 0.6rem 0.45rem;
   border-radius: 0.4rem;
-  border: 1px solid #aaa;
   background-color: transparent;
+  border: 1px solid #aaa;
   color: #444;
   outline: none;
   text-decoration: none;
@@ -49,6 +59,11 @@ button {
   width: auto;
   height: auto;
   margin: 0;
+}
+.dark button,
+.dark .button {
+  border-color: hsl(214, 5%, 40%);
+  color: hsl(214, 10%, 88%);
 }
 button:hover,
 .button:hover,
@@ -58,16 +73,31 @@ button:focus,
   border-color: #555;
   color: #000;
 }
-.primary {
+.dark button:hover,
+.dark .button:hover,
+.dark button:focus,
+.dark .button:focus {
+  background-color: hsl(214, 6%, 18%);
+  border-color: hsl(214, 1%, 75%);
+  color: hsl(214, 10%, 88%);
+}
+.primary,
+.dark .primary {
   color: #fff;
-  border-color: #1471eb;
-  background-color: #1471eb;
+  border-color: hsl(214, 84%, 50%);
+  background-color: hsl(214, 84%, 50%);
 }
 .primary:hover,
 .primary:focus {
   color: #fff;
   border-color: #125ece;
   background-color: #125ece;
+}
+.dark .primary:hover,
+.dark .primary:focus {
+  color: #fff;
+  border-color: hsl(214, 90%, 56%);
+  background-color: hsl(214, 90%, 56%);
 }
 button:disabled,
 button:disabled:hover,
@@ -76,6 +106,13 @@ button:disabled:focus {
   background-color: #eee;
   border-color: #aaa;
   color: #777;
+}
+.dark button:disabled,
+.dark button:disabled:hover,
+.dark button:disabled:focus {
+  background-color: hsl(214, 6%, 25%);
+  border-color: hsl(214, 6%, 40%);
+  color: hsl(214, 6%, 60%);
 }
 label {
   display: block;
@@ -94,21 +131,43 @@ select {
   width: 100%;
   margin: 0.25rem 0;
 }
+.dark input,
+.dark textarea,
+.dark select {
+  /* background-color: hsl(214, 6%, 12%); */
+  background-color: transparent;
+  border-color: hsl(214, 5%, 40%);
+  color: hsl(214, 12%, 92%);
+  fill: hsl(214, 12%, 92%);
+}
 input:hover,
 textarea:hover,
 select:hover {
   border-color: #bbb;
+}
+.dark input:hover,
+.dark textarea:hover,
+.dark select:hover {
+  border-color: hsl(214, 5%, 50%);
 }
 input:focus,
 textarea:focus,
 select:focus {
   border-color: #999;
 }
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+  border-color: hsl(214, 5%, 60%);
+}
 textarea {
   resize: none;
   height: auto;
   line-height: 1.15;
   padding: 0.35rem 0.55rem;
+}
+.icon-button {
+  /*  */
 }
 .flex-parent {
   display: flex;
@@ -140,8 +199,16 @@ p.helper {
 .error {
   color: #820014;
 }
+.dark .error {
+  color: #ffccc7;
+  /* #ffa39e #ff7875 */
+}
 .valid {
   color: #237804;
+}
+.dark .valid {
+  color: #d9f7be;
+  /* #b7eb8f #95de64 */
 }
 .extra-text {
   display: none;

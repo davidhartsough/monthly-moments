@@ -20,9 +20,18 @@ select {
   width: 7rem;
   cursor: pointer;
 }
+.dark select {
+  background-color: transparent;
+  border-color: hsl(214, 5%, 40%);
+  /* color: hsl(214, 12%, 92%); */
+}
 select:hover {
-  border-color: hsl(208, 16%, 72%);
+  border-color: hsl(214, 16%, 72%);
   background-color: #fcfcfd;
+}
+.dark select:hover {
+  border-color: hsl(214, 8%, 50%);
+  background-color: hsl(214, 6%, 18%);
 }
 .month-nav {
   display: flex;
@@ -32,12 +41,21 @@ select:hover {
   cursor: pointer;
   color: #555;
 }
+.dark .month-nav {
+  color: hsl(214, 8%, 80%);
+}
 .month-nav:hover {
   color: #000;
+}
+.dark .month-nav:hover {
+  color: hsl(214, 12%, 92%);
 }
 .month-nav.disabled {
   color: #eee;
   cursor: default;
+}
+.dark .month-nav.disabled {
+  color: hsl(214, 5%, 40%);
 }
 .month-list {
   margin-bottom: 8rem;

@@ -11,14 +11,25 @@
   background-color: #fff;
   line-height: 1.25;
 }
+.dark .list,
+.dark .list-item {
+  background-color: transparent;
+  border-color: hsl(214, 5%, 40%);
+}
 .list-item:last-child {
   border-bottom: none;
 }
 a.list-item:hover {
   background-color: #f8f8f8;
 }
+.dark a.list-item:hover {
+  background-color: hsl(214, 5%, 18%);
+}
 a.list-item:focus {
   background-color: #ebebeb;
+}
+.dark a.list-item:focus {
+  background-color: hsl(214, 5%, 25%);
 }
 .list-item-text {
   flex: 1 1 auto;
@@ -26,10 +37,16 @@ a.list-item:focus {
 .p-name {
   color: #000;
 }
+.dark .p-name {
+  color: hsl(214, 12%, 92%);
+}
 .p-username {
   color: #444;
   font-weight: bold;
   font-size: 0.875rem;
+}
+.dark .p-username {
+  color: hsl(214, 6%, 64%);
 }
 .list-item-actions {
   display: flex;

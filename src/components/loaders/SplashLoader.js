@@ -1,6 +1,8 @@
 import React from "react";
 import Loader from "./Loader";
-import logo from "./logo-blue.svg";
+import { getTheme } from "../../theme";
+import BlueLogo from "./logo-blue.svg";
+import WhiteLogo from "./logo-white.svg";
 import "./Splash.css";
 
 export default () => (
@@ -9,7 +11,11 @@ export default () => (
       <Loader size={9} marginTop={0} />
     </div>
     <div className="splash flex-center">
-      <img src={logo} id="logo" alt="logo" />
+      <img
+        src={getTheme() === "dark" ? WhiteLogo : BlueLogo}
+        id="logo"
+        alt="logo"
+      />
     </div>
   </div>
 );

@@ -12,6 +12,9 @@
   justify-content: center;
   align-items: center;
 }
+.dark .modal-bg {
+  background-color: rgba(0, 0, 0, 0.6);
+}
 .modal {
   background-color: #f8f8f8;
   border-radius: 0.5rem;
@@ -20,6 +23,10 @@
   border: 1px solid #eee;
   box-shadow: 0 0 1rem 1rem rgba(0, 0, 0, 0.1);
 }
+.dark .modal {
+  background-color: hsl(214, 5%, 5%);
+  border-color: hsl(214, 5%, 40%);
+}
 .modal-menu-option {
   padding: 0.5rem 1rem;
   color: #000;
@@ -27,6 +34,12 @@
   display: block;
   cursor: pointer;
 }
+.dark .modal-menu-option {
+  color: hsl(214, 12%, 94%);
+}
 .modal-menu-option:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+.dark .modal-menu-option:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
