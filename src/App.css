@@ -132,10 +132,16 @@ textarea {
 .helper {
   font-size: 0.875rem;
   line-height: 1;
+  align-self: center;
+}
+p.helper {
   margin-bottom: 0.5rem;
 }
 .error {
   color: #820014;
+}
+.valid {
+  color: #237804;
 }
 .extra-text {
   display: none;

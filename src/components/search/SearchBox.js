@@ -9,7 +9,7 @@ export default function SearchBox(props) {
       <input
         type="search"
         placeholder="Search"
-        maxLength="100"
+        maxLength="70"
         minLength="2"
         {...props}
       />

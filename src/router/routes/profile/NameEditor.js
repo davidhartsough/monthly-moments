@@ -23,8 +23,8 @@ function NameEditor({ close, profile, submit }) {
             type="text"
             placeholder="Name"
             id="name-input"
-            maxLength="100"
-            minLength="2"
+            maxLength="70"
+            minLength="3"
             autoFocus
             onChange={onChange}
             value={name}
@@ -34,7 +34,7 @@ function NameEditor({ close, profile, submit }) {
           <button
             type="submit"
             className="primary"
-            disabled={name.trim().length < 2 || name.length > 100}
+            disabled={name.trim().length < 3 || name.length > 70}
           >
             Save
           </button>

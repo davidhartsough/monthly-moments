@@ -1,89 +1,84 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { createProfile } from "../store/actions/auth";
-import { useForm } from "react-hook-form";
 import { getPerson } from "../store/db/fb";
 import Loader from "../components/loaders/Loader";
 
-const usernamePattern = /^\p{L}{3,50}$/u;
+const usernamePattern = /^\p{L}{1,50}$/u;
 
 function CreateProfile({ displayName, suggestion, makeProfile }) {
-  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { register, handleSubmit, errors } = useForm();
-  function onSubmit(data) {
+  const [name, setName] = useState(displayName);
+  const [username, setUsername] = useState(suggestion);
+  const [error, setError] = useState(false);
+  const onNameChange = ({ target }) => setName(target.value);
+  const onUsernameChange = ({ target }) => setUsername(target.value);
+  function onSubmit(e) {
+    e.preventDefault();
     if (loading) return;
     setLoading(true);
-    const name = data.name.trim();
-    const username = data.username.trim();
-    getPerson(username)
+    const _name = name.trim();
+    const _username = username.trim();
+    getPerson(_username)
       .then(() => {
-        setError(username);
+        setError(_username);
         setLoading(false);
       })
       .catch(() => {
         setError(false);
-        makeProfile(name, username);
+        makeProfile(_name, _username);
       });
   }
+  const nlen = name.length;
+  const ulen = username.length;
+  const nameIsValid = nlen >= 3 && nlen <= 70;
+  const passPattern = usernamePattern.test(username);
+  const usernameIsValid = ulen >= 3 && ulen <= 50 && passPattern;
   return (
     <section>
       <header>
         <h1>Monthly Moments</h1>
         <h2>Create a profile</h2>
       </header>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={onSubmit}>
         <label>
-          Name
+          <p className="flex-parent">
+            <span className="flex-fill">Name</span>
+            <span className={`helper${nameIsValid ? " valid" : ""}`}>
+              {`${nlen}/70`}
+            </span>
+          </p>
           <input
             type="text"
             placeholder={displayName || "Name"}
-            name="name"
-            maxLength="100"
+            maxLength="70"
             minLength="3"
-            defaultValue={displayName}
-            ref={register({
-              required: "A name is required.",
-              maxLength: {
-                value: 100,
-                message: "Please use fewer than 100 letters.",
-              },
-              minLength: {
-                value: 3,
-                message: "Please enter at least 3 letters.",
-              },
-            })}
+            value={name}
+            onChange={onNameChange}
+            required
           />
         </label>
-        {errors.name && <p className="helper error">{errors.name.message}</p>}
         <label>
-          Username
+          <p className="flex-parent">
+            <span className="flex-fill">Username</span>
+            <span className={`helper${usernameIsValid ? " valid" : ""}`}>
+              {`${ulen}/50`}
+            </span>
+          </p>
           <input
             type="text"
             placeholder={suggestion || "username"}
-            name="username"
             maxLength="50"
             minLength="3"
-            defaultValue={suggestion}
-            ref={register({
-              required: "A username is required.",
-              maxLength: {
-                value: 50,
-                message: "Please use fewer than 50 letters.",
-              },
-              minLength: {
-                value: 3,
-                message: "Please enter at least 3 letters.",
-              },
-              pattern: {
-                value: usernamePattern,
-                message: "Please only use lowercase letters.",
-              },
-            })}
+            title="Please only use lowercase letters."
+            pattern="^\p{L}{1,50}$"
+            value={username}
+            onChange={onUsernameChange}
+            required
           />
         </label>
-        {errors.username && (
-          <p className="helper error">{errors.username.message}</p>
+        {ulen > 0 && !passPattern && (
+          <p className="helper error">Please only use lowercase letters.</p>
         )}
         {!!error && (
           <p className="helper error">
@@ -98,7 +93,11 @@ function CreateProfile({ displayName, suggestion, makeProfile }) {
           {loading ? (
             <Loader size={2} />
           ) : (
-            <button type="submit" className="primary">
+            <button
+              type="submit"
+              className="primary"
+              disabled={!nameIsValid || !usernameIsValid}
+            >
               Create
             </button>
           )}
