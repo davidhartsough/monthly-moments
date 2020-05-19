@@ -17,7 +17,7 @@ export default function MomentForm({ initialMoment, onSave, onDelete = null }) {
         maxLength="480"
         minLength="2"
       />
-      <div className="form-actions">
+      <div className="align-right">
         {initialMoment.id && text.trim().length === 0 ? (
           <button onClick={onDelete}>Delete</button>
         ) : (

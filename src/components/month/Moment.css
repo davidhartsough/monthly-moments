@@ -1,0 +1,14 @@
+.moment {
+  margin: 1rem 0;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.moment-text {
+  padding: 0.75rem 1rem;
+  white-space: pre-line;
+}
+.moment-link:hover {
+  text-decoration: underline;
+}

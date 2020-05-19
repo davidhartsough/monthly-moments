@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { signOut } from "../../../store/actions/auth";
 import { MoreVertical } from "react-feather";
 import NameEditor from "./NameEditor";
+import { Modal, ModalMenu } from "../../../components/modal/";
+import "./MoreMenu.css";
 
 function MoreMenu({ logOut }) {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -16,24 +18,20 @@ function MoreMenu({ logOut }) {
   }
   return (
     <>
-      <div className="more-menu" onClick={openMenu}>
+      <div className="flex-center more-menu" onClick={openMenu}>
         <MoreVertical size={20} />
       </div>
       {editorVisible && <NameEditor close={closeAll} />}
       {menuVisible && (
-        <div className="modal-bg" onClick={closeMenu}>
-          <div className="modal-menu">
-            <div className="modal-menu-option" onClick={openEditor}>
-              Edit name
-            </div>
-            <div className="modal-menu-option">
-              Enable dark mode (coming soon!)
-            </div>
-            <div className="modal-menu-option" onClick={logOut}>
-              Sign out
-            </div>
-          </div>
-        </div>
+        <Modal close={closeMenu} closeOnClick={true}>
+          <ModalMenu
+            options={[
+              { title: "Edit name", onClick: openEditor },
+              { title: "Enable dark mode (coming soon)", onClick: closeMenu },
+              { title: "Sign out", onClick: logOut },
+            ]}
+          />
+        </Modal>
       )}
     </>
   );

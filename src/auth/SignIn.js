@@ -6,11 +6,9 @@ export default function SignIn() {
   return (
     <section>
       <header>
-        <div className="header-text">
-          <h1 className="sign-in-title">Monthly Moments</h1>
-        </div>
+        <h1 className="central">Monthly Moments</h1>
       </header>
-      <div id="sign-in-options">
+      <div>
         <StyledFirebaseAuth
           uiConfig={{
             signInSuccessUrl: "/",

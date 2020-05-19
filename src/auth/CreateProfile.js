@@ -27,14 +27,12 @@ function CreateProfile({ displayName, suggestion, makeProfile }) {
       });
   }
   return (
-    <section id="create-profile">
+    <section>
       <header>
-        <div className="header-text">
-          <h1>Monthly Moments</h1>
-          <h2>Create a profile</h2>
-        </div>
+        <h1>Monthly Moments</h1>
+        <h2>Create a profile</h2>
       </header>
-      <form onSubmit={handleSubmit(onSubmit)} className="new-profile-form">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label>
           Name
           <input
@@ -96,7 +94,7 @@ function CreateProfile({ displayName, suggestion, makeProfile }) {
           Please note that you <strong>cannot</strong> change your username
           after this.
         </p>
-        <div className="create-action">
+        <div className="central">
           {loading ? (
             <Loader size={2} />
           ) : (

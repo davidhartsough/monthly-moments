@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Search, User, Home } from "react-feather";
+import "./Layout.css";
 
 export default function Layout({ children }) {
   return (

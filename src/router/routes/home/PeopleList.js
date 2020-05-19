@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Search } from "react-feather";
+import { List, LinkListItem } from "../../../components/list/";
+import SearchBox from "../../../components/search/";
 
 export default function PeopleList({ data }) {
   const [search, setSearch] = useState("");
@@ -20,33 +21,15 @@ export default function PeopleList({ data }) {
   }
   return (
     <>
-      {data.length > 10 && (
-        <label className="search">
-          <Search size={20} className="search-icon" />
-          <input
-            type="search"
-            placeholder="Search"
-            id="filter-input"
-            maxLength="100"
-            minLength="2"
-            value={search}
-            onChange={handleSearch}
-          />
-        </label>
-      )}
-      <div className="connections people-list list">
+      {data.length > 10 && <SearchBox value={search} onChange={handleSearch} />}
+      <List>
         {listItems.length > 0 ? (
           listItems.map(({ username, name }, i) => (
-            <Link
-              to={`/p/${username}`}
+            <LinkListItem
               key={`${username}-${name}-${i}`}
-              className="list-item"
-            >
-              <div className="list-item-text">
-                <p className="p-name">{name}</p>
-                <p className="p-username">{username}</p>
-              </div>
-            </Link>
+              username={username}
+              name={name}
+            />
           ))
         ) : (
           <div className="empty">
@@ -54,7 +37,7 @@ export default function PeopleList({ data }) {
             <Link to="/search">Find friends</Link>
           </div>
         )}
-      </div>
+      </List>
     </>
   );
 }

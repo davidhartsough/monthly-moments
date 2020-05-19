@@ -1,4 +1,5 @@
 import React from "react";
+import "./Loader.css";
 
 export default ({ size = 3, marginTop = "2rem" }) => (
   <div

@@ -8,6 +8,7 @@ import { Edit } from "react-feather";
 import MomentForm from "./MomentForm";
 import Moment from "./Moment";
 import Loader from "../loaders/Loader";
+import "./EditableMoment.css";
 
 function EditableMoment({ moment, saveChanges, removeMoment }) {
   const [editing, setEditing] = useState(false);
@@ -40,8 +41,7 @@ function EditableMoment({ moment, saveChanges, removeMoment }) {
       ) : (
         <>
           <Moment moment={moment} />
-
-          <div className="open-menu" onClick={toggle}>
+          <div className="toggle-edit flex-center" onClick={toggle}>
             <Edit size={16} />
           </div>
         </>

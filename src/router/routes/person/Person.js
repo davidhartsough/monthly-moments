@@ -32,16 +32,14 @@ function Person({
   return (
     <Layout>
       <header>
-        <div className="header-text">
-          <h1>{person.name}</h1>
-          <h2>{person.username}</h2>
-        </div>
+        <h1>{person.name}</h1>
+        <h2>{person.username}</h2>
       </header>
       <hr />
       {profile.connections.includes(username) ? (
         <Month initialMonth={month} uid={person.uid} />
       ) : (
-        <div className="interactions">
+        <div className="central">
           {loading ? (
             <Loader size={2} marginTop={0} />
           ) : profile.requested.includes(username) ? (

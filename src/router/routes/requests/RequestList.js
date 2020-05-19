@@ -1,12 +1,13 @@
 import React from "react";
 import RequestListItem from "./RequestListItem";
+import { List } from "../../../components/list";
 
 export default function RequestList({ people }) {
   return (
-    <div className="requests people-list list">
+    <List>
       {people.map(({ username, name }) => (
         <RequestListItem key={username} username={username} name={name} />
       ))}
-    </div>
+    </List>
   );
 }

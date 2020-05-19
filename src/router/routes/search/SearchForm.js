@@ -1,42 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { runQuery } from "../../../store/actions/search";
-import { Search as SearchIcon } from "react-feather";
-import { useForm } from "react-hook-form";
+import SearchBox from "../../../components/search/";
 
 function SearchForm({ submit, query, loading }) {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => submit(data.search.trim().toUpperCase());
+  const [input, setInput] = useState(query.toLowerCase());
+  const onChange = ({ target }) => setInput(target.value);
+  function onSubmit(e) {
+    e.preventDefault();
+    if (loading) return;
+    const search = input.trim().toUpperCase();
+    if (search.length > 1 && search !== query) {
+      submit(search);
+    }
+  }
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="search-form">
-      <label className="search">
-        <SearchIcon size={20} className="search-icon" />
-        <input
-          type="search"
-          placeholder="Search"
-          id="search-input"
-          maxLength="100"
-          minLength="2"
-          name="search"
-          defaultValue={query}
-          ref={register({
-            maxLength: {
-              value: 100,
-              message: "Please use fewer than 100 characters.",
-            },
-            minLength: {
-              value: 2,
-              message: "Please enter at least 2 letters.",
-            },
-          })}
-        />
-      </label>
-      <button
-        type="submit"
-        hidden
-        className="search-button hide"
-        disabled={loading}
-      >
+    <form onSubmit={onSubmit} className="search-form">
+      <SearchBox value={input} onChange={onChange} />
+      <button type="submit" hidden className="hide" disabled={loading}>
         Search
       </button>
     </form>

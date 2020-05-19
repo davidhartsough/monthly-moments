@@ -1,5 +1,6 @@
 import React from "react";
 import ResultListItem from "./ResultListItem";
+import { List } from "../../../components/list";
 
 export default function Results({ results }) {
   if (results.length < 1) {
@@ -10,10 +11,10 @@ export default function Results({ results }) {
     );
   }
   return (
-    <div className="results people-list list">
+    <List>
       {results.map(({ username, name }) => (
         <ResultListItem key={username} username={username} name={name} />
       ))}
-    </div>
+    </List>
   );
 }

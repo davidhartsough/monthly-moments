@@ -1,0 +1,41 @@
+.list {
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  margin: 0.75rem 0;
+  overflow: hidden;
+}
+.list-item {
+  display: flex;
+  padding: 0.5rem 0.875rem;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  line-height: 1.25;
+}
+.list-item:last-child {
+  border-bottom: none;
+}
+a.list-item:hover {
+  background-color: #f8f8f8;
+}
+a.list-item:focus {
+  background-color: #ebebeb;
+}
+.list-item-text {
+  flex: 1 1 auto;
+}
+.p-name {
+  color: #000;
+}
+.p-username {
+  color: #444;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+.list-item-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.list-item-actions button {
+  margin-left: 0.25rem;
+}

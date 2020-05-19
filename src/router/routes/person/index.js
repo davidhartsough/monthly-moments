@@ -10,10 +10,8 @@ function MyPerson({ month, profile }) {
   return (
     <Layout>
       <header>
-        <div className="header-text">
-          <h1>{profile.name}</h1>
-          <h2>{profile.username}</h2>
-        </div>
+        <h1>{profile.name}</h1>
+        <h2>{profile.username}</h2>
       </header>
       <hr />
       <Month initialMonth={month} uid={profile.uid} />

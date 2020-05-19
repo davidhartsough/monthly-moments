@@ -1,9 +1,15 @@
 import React from "react";
 import Loader from "./Loader";
-import Splash from "../Splash";
+import logo from "./logo-blue.svg";
+import "./Splash.css";
 
 export default () => (
-  <Splash>
-    <Loader size={5} marginTop={-12} />
-  </Splash>
+  <div>
+    <div className="splash flex-center">
+      <Loader size={9} marginTop={0} />
+    </div>
+    <div className="splash flex-center">
+      <img src={logo} id="logo" alt="logo" />
+    </div>
+  </div>
 );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { changeName } from "../../../store/actions/profile";
+import { Modal } from "../../../components/modal/";
 
 function NameEditor({ close, profile, submit }) {
   const [name, setName] = useState(profile.name);
@@ -13,36 +14,33 @@ function NameEditor({ close, profile, submit }) {
       close();
     }
   }
-  const dontClose = (e) => e.stopPropagation();
   return (
-    <div className="modal-bg" onClick={close}>
-      <div className="name-editor" onClick={dontClose}>
-        <form onSubmit={onSubmit} className="name-form">
-          <label>
-            Name
-            <input
-              type="text"
-              placeholder="Name"
-              id="name-input"
-              maxLength="100"
-              minLength="2"
-              autoFocus
-              onChange={onChange}
-              value={name}
-            />
-          </label>
-          <div className="form-actions">
-            <button
-              type="submit"
-              className="primary"
-              disabled={name.trim().length < 2 || name.length > 100}
-            >
-              Save
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <Modal close={close}>
+      <form onSubmit={onSubmit} className="name-editor">
+        <label>
+          Name
+          <input
+            type="text"
+            placeholder="Name"
+            id="name-input"
+            maxLength="100"
+            minLength="2"
+            autoFocus
+            onChange={onChange}
+            value={name}
+          />
+        </label>
+        <div className="align-right">
+          <button
+            type="submit"
+            className="primary"
+            disabled={name.trim().length < 2 || name.length > 100}
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </Modal>
   );
 }
 

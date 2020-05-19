@@ -10,7 +10,7 @@ export default function Search({ loading, query = "", data }) {
       <header>
         <h1>Search</h1>
       </header>
-      <SearchForm query={query.toLowerCase()} loading={loading} />
+      <SearchForm query={query} loading={loading} />
       {loading ? (
         <Loader />
       ) : query?.length > 0 ? (
