@@ -23,7 +23,6 @@ select {
 .dark select {
   background-color: transparent;
   border-color: hsl(214, 5%, 40%);
-  /* color: hsl(214, 12%, 92%); */
 }
 select:hover {
   border-color: hsl(214, 16%, 72%);
