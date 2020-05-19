@@ -7,7 +7,7 @@ import rootReducer from "./reducers";
 const persistConfig = {
   key: "root_monthly_moments",
   storage,
-  blacklist: ["auth"],
+  blacklist: ["auth", "profile", "requests"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
