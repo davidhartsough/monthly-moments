@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { changeName } from "../../../store/actions/profile";
-import { Modal } from "../../../components/modal/";
+import { Modal } from "../../../components/modal";
 
 function NameEditor({ close, profile, submit }) {
   const [name, setName] = useState(profile.name);

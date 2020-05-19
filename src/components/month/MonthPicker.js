@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "react-feather";
 import { useHistory } from "react-router-dom";
+import { monthOptions } from "../../date-utils";
 import "./MonthPicker.css";
 
-export default function MonthPicker({
-  month,
-  setMonth,
-  monthOptions,
-  urlBase,
-  isMyProfile,
-}) {
+export default function MonthPicker({ month, setMonth, urlBase }) {
   const history = useHistory();
   const [monthIndex, setMonthIndex] = useState(
     monthOptions.findIndex((m) => m.value === month)
@@ -18,21 +13,21 @@ export default function MonthPicker({
     const { value } = target;
     setMonth(value);
     setMonthIndex(monthOptions.findIndex((m) => m.value === value));
-    if (!isMyProfile) history.push(`${urlBase}/${value}`);
+    history.push(`${urlBase}/${value}`);
   }
   function goToPrevMonth() {
     const prevMonthIndex = monthIndex + 1;
     const prevMonth = monthOptions[prevMonthIndex].value;
     setMonthIndex(prevMonthIndex);
     setMonth(prevMonth);
-    if (!isMyProfile) history.push(`${urlBase}/${prevMonth}`);
+    history.push(`${urlBase}/${prevMonth}`);
   }
   function goToNextMonth() {
     const nextMonthIndex = monthIndex - 1;
     const nextMonth = monthOptions[nextMonthIndex].value;
     setMonthIndex(nextMonthIndex);
     setMonth(nextMonth);
-    if (!isMyProfile) history.push(`${urlBase}/${nextMonth}`);
+    history.push(`${urlBase}/${nextMonth}`);
   }
   return (
     <div className="month-picker">

@@ -42,13 +42,17 @@ export const myMonthOptions = allMonthOptions;
 export const monthOptions = allMonthOptions.slice(1);
 export const currentMonth = `${currentYear}-${currentMonthNumber}`;
 export const lastMonth = allMonthOptions[1].value;
+export const currentMonthFormatted = date.toLocaleDateString(undefined, {
+  month: "long",
+  year: "numeric",
+});
 const yearAndMonthPattern = /^20\d{2}-([1-9]|10|11|12)$/;
 export function isValidMonth(yearAndMonth) {
   if (yearAndMonthPattern.test(yearAndMonth)) {
     const [yearNum, monthNum] = yearAndMonth.split("-").map((i) => Number(i));
     const yearIsValid = yearNum >= 2020 && yearNum <= currentYear;
     const monthIsValid =
-      yearNum === currentMonth ? monthNum <= currentMonthNumber : true;
+      yearNum === currentYear ? monthNum < currentMonthNumber : true;
     return yearIsValid && monthIsValid;
   }
   return false;

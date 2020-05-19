@@ -1,11 +1,12 @@
 import React from "react";
 import Layout from "../../../components/Layout";
 import Month from "../../../components/month";
-import MoreMenu from "./MoreMenu";
-import { currentMonth } from "../../../date-utils";
 import RequestsLink from "./RequestsLink";
+import MoreMenu from "./MoreMenu";
 
-export default function Profile({ name, username, requestCount }) {
+export default function MyPerson({ month, profile }) {
+  const { username, name, uid, requests, ignored } = profile;
+  const requestCount = requests.filter((i) => !ignored.includes(i)).length;
   return (
     <Layout>
       <header className="flex-parent">
@@ -23,7 +24,7 @@ export default function Profile({ name, username, requestCount }) {
         </div>
       </header>
       <hr />
-      <Month uid="my profile" initialMonth={currentMonth} />
+      <Month initialMonth={month} uid={uid} />
     </Layout>
   );
 }

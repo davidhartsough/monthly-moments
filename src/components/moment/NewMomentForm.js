@@ -15,7 +15,6 @@ function NewMomentForm({ saveNewMoment }) {
   }
   return (
     <div className="new-moment">
-      <p className="subheading">Add to your month</p>
       {loading ? (
         <Loader />
       ) : (

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { signOut } from "../../../store/actions/auth";
 import { MoreVertical } from "react-feather";
 import NameEditor from "./NameEditor";
-import { Modal, ModalMenu } from "../../../components/modal/";
+import { Modal, ModalMenu } from "../../../components/modal";
 import "./MoreMenu.css";
 
 function MoreMenu({ logOut }) {

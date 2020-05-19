@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { Home, Profile, Person, Search, Requests } from "./routes";
+import { Home, Add, Person, Search, Requests } from "./routes";
 
 export default () => (
   <BrowserRouter>
@@ -11,8 +11,8 @@ export default () => (
       <Route path="/search">
         <Search />
       </Route>
-      <Route path="/profile">
-        <Profile />
+      <Route path="/add">
+        <Add />
       </Route>
       <Route path="/requests">
         <Requests />

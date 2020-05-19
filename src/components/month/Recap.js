@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchRecap } from "../../store/actions/recap";
 import Loader from "../loaders/Loader";
-import Moment from "./Moment";
+import Moment from "../moment/Moment";
 
 const Empty = () => (
   <div className="empty">

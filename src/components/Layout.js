@@ -1,9 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { Search, User, Home } from "react-feather";
+import { Search, User, Home, PlusCircle } from "react-feather";
 import "./Layout.css";
 
-export default function Layout({ children }) {
+function Layout({ children, username }) {
   return (
     <>
       <nav>
@@ -14,7 +15,10 @@ export default function Layout({ children }) {
           <NavLink to="/search" className="nav-link">
             <Search />
           </NavLink>
-          <NavLink to="/profile" className="nav-link">
+          <NavLink to="/add" className="nav-link">
+            <PlusCircle />
+          </NavLink>
+          <NavLink to={`/p/${username}`} className="nav-link">
             <User />
           </NavLink>
         </div>
@@ -23,3 +27,5 @@ export default function Layout({ children }) {
     </>
   );
 }
+
+export default connect(({ profile: { username } }) => ({ username }))(Layout);
