@@ -6,7 +6,7 @@ import Moment from "../moment/Moment";
 
 const Empty = () => (
   <div className="empty">
-    <p>No Moments for this month.</p>
+    <p>No moments for this month.</p>
   </div>
 );
 

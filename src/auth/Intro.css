@@ -1,0 +1,37 @@
+ul,
+ol {
+  margin: 0.25rem 0 1rem;
+  padding-inline-start: 2rem;
+}
+#intro p {
+  margin: 1rem 0 0.25rem;
+}
+.intro-actions {
+  margin: 2rem 0 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.intro-actions button {
+  margin-left: 0.25rem;
+}
+.helper {
+  font-size: 0.875rem;
+  line-height: 1;
+  align-self: center;
+}
+p.helper {
+  margin-bottom: 0.5rem;
+}
+.error {
+  color: #820014;
+}
+.dark .error {
+  color: #ffa39e;
+}
+.valid {
+  color: #237804;
+}
+.dark .valid {
+  color: #b7eb8f;
+}

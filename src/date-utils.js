@@ -12,8 +12,24 @@ const months = [
   "Nov",
   "Dec",
 ];
+const monthsLong = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 const date = new Date();
-const currentMonthNumber = date.getMonth() + 1;
+const currentMonthIndex = date.getMonth();
+const lastMonthIndex = currentMonthIndex - 1;
+const currentMonthNumber = currentMonthIndex + 1;
 const currentYear = date.getFullYear();
 const startingYear = 2020;
 function getMonthOptions() {
@@ -38,14 +54,11 @@ function getMonthOptions() {
 }
 
 const allMonthOptions = getMonthOptions();
-export const myMonthOptions = allMonthOptions;
 export const monthOptions = allMonthOptions.slice(1);
 export const currentMonth = `${currentYear}-${currentMonthNumber}`;
 export const lastMonth = allMonthOptions[1].value;
-export const currentMonthFormatted = date.toLocaleDateString(undefined, {
-  month: "long",
-  year: "numeric",
-});
+export const currentMonthFormatted = `${monthsLong[currentMonthIndex]} ${currentYear}`;
+export const lastMonthFormatted = `${monthsLong[lastMonthIndex]}`;
 const yearAndMonthPattern = /^20\d{2}-([1-9]|10|11|12)$/;
 export function isValidMonth(yearAndMonth) {
   if (yearAndMonthPattern.test(yearAndMonth)) {

@@ -184,26 +184,6 @@ textarea {
   margin: 1rem 0;
   text-align: center;
 }
-.helper {
-  font-size: 0.875rem;
-  line-height: 1;
-  align-self: center;
-}
-p.helper {
-  margin-bottom: 0.5rem;
-}
-.error {
-  color: #820014;
-}
-.dark .error {
-  color: #ffa39e;
-}
-.valid {
-  color: #237804;
-}
-.dark .valid {
-  color: #b7eb8f;
-}
 .extra-text {
   display: none;
 }

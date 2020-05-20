@@ -4,7 +4,7 @@ import { handleAuth, setAuthLoading } from "../store/actions/auth";
 import { handleAuthState } from "../store/db/auth";
 import SplashLoader from "../components/loaders/SplashLoader";
 import SignIn from "./SignIn";
-import CreateProfile from "./CreateProfile";
+import Intro from "./Intro";
 
 function Authenticator({ children, auth, handleUser, keepLoading }) {
   const [loading, setLoading] = useState(true);
@@ -18,14 +18,7 @@ function Authenticator({ children, auth, handleUser, keepLoading }) {
   }, [keepLoading, handleUser]);
   if (auth.loading || loading) return <SplashLoader />;
   if (auth.isSignedIn) {
-    if (!auth.hasProfile) {
-      return (
-        <CreateProfile
-          displayName={auth.displayName}
-          suggestion={auth.suggestion}
-        />
-      );
-    }
+    if (!auth.hasProfile) return <Intro auth={auth} />;
     return children;
   }
   return <SignIn />;

@@ -24,8 +24,8 @@
   box-shadow: 0 0 1rem 1rem rgba(0, 0, 0, 0.1);
 }
 .dark .modal {
-  background-color: hsl(214, 5%, 5%);
-  border-color: hsl(214, 5%, 40%);
+  background-color: hsl(214, 5%, 10%);
+  border-color: hsl(214, 5%, 35%);
 }
 .modal-menu-option {
   padding: 0.5rem 1rem;
@@ -35,7 +35,7 @@
   cursor: pointer;
 }
 .dark .modal-menu-option {
-  color: hsl(214, 12%, 94%);
+  color: hsl(214, 12%, 92%);
 }
 .modal-menu-option:hover {
   background-color: rgba(0, 0, 0, 0.1);
