@@ -15,7 +15,7 @@ function Authenticator({ children, auth, handleUser, keepLoading }) {
       keepLoading();
       handleUser(user);
     });
-  }, [keepLoading, handleUser]);
+  }, [keepLoading, handleUser, setLoading]);
   if (auth.loading || loading) return <SplashLoader />;
   if (auth.isSignedIn) {
     if (!auth.hasProfile) return <Intro auth={auth} />;

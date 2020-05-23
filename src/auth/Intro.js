@@ -22,7 +22,7 @@ export default function Intro({ auth }) {
     <section>
       <header>
         <h1>Monthly Moments</h1>
-        <h2>An introduction</h2>
+        <h2>Introduction</h2>
       </header>
       <div id="intro">
         <p>
@@ -34,17 +34,15 @@ export default function Intro({ auth }) {
           <strong>How Monthly Moments works</strong>
         </p>
         <p>
-          It's like a monthly newsletter; at the beginning of each month,
-          everyone's Moments from the last month will be shared with their
-          friends. So during each month, everyone writes down Moments from the
-          current month that will be shared with their friends at the start of
-          the next month.
+          It's like a monthly newsletter; everyone writes about Moments from
+          their lives throughout each month, and then at the beginning of the
+          next month, all of those Moments are shared out to their friends.
         </p>
         <p>
           <strong>Examples of Moments</strong>
         </p>
         <p>
-          Generally, Moments capture the things you take pride in and want to
+          Generally, Moments capture the the parts of your life that you want to
           share with your friends, including:
         </p>
         <ul>
