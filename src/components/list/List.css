@@ -33,6 +33,7 @@ a.list-item:focus {
 }
 .list-item-text {
   flex: 1 1 auto;
+  overflow: hidden;
 }
 .p-name {
   color: #000;

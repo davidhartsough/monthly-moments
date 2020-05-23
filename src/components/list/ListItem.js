@@ -5,7 +5,7 @@ export default function ListItem({ name, username, children }) {
     <div className="list-item">
       <div className="list-item-text">
         <p className="p-name">{name}</p>
-        <p className="p-username">{username}</p>
+        <p className="p-username truncate">{username}</p>
       </div>
       <div className="list-item-actions">{children}</div>
     </div>
