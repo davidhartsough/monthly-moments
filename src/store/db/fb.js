@@ -259,7 +259,7 @@ function addToMyConnections(id) {
       });
     })
     .then(() => true)
-    .catch((err) => console.warn(`Error ignoring request (${id}) : `, err));
+    .catch((err) => console.warn(`Error adding connection (${id}) : `, err));
 }
 
 function completeConnection(id) {
@@ -285,6 +285,44 @@ export function acceptRequest(id) {
   return new Promise((resolve, reject) => {
     return Promise.all([addToMyConnections(id), completeConnection(id)])
       .then(([_, person]) => resolve(person))
+      .catch(reject);
+  });
+}
+
+function addDavidToMe() {
+  const docRef = _db.collection("profiles").doc(_username);
+  return _db
+    .runTransaction((transaction) => {
+      return transaction.get(docRef).then((doc) => {
+        const { connections } = doc.data();
+        connections.push("david");
+        transaction.update(docRef, { connections });
+        return true;
+      });
+    })
+    .then(() => true)
+    .catch((err) => console.warn(`Error adding david: `, err));
+}
+
+function addMeToDavid() {
+  const docRef = _db.collection("profiles").doc("david");
+  return _db
+    .runTransaction((transaction) => {
+      return transaction.get(docRef).then((doc) => {
+        const { connections } = doc.data();
+        connections.push(_username);
+        transaction.update(docRef, { connections });
+        return true;
+      });
+    })
+    .then(() => true)
+    .catch((err) => console.warn(`Error adding to david: `, err));
+}
+
+export function connectWithDavid() {
+  return new Promise((resolve, reject) => {
+    return Promise.all([addDavidToMe(), addMeToDavid()])
+      .then((res) => resolve(res))
       .catch(reject);
   });
 }

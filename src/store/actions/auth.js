@@ -3,6 +3,7 @@ import {
   setUID,
   createProfile as dbCreateProfile,
   setUsername,
+  connectWithDavid,
 } from "../db/fb";
 import { getProfile, receiveProfile } from "./profile";
 
@@ -54,15 +55,30 @@ export const handleAuth = (user) => (dispatch, getState) => {
   }
 };
 
-const setHasProfile = (hasProfile = false) => ({
-  type: "set_has_profile",
-  payload: { hasProfile },
-});
+const finishCreatingProfile = () => ({ type: "finish_creating_profile" });
 
 export const createProfile = (name, username) => (dispatch) => {
   dispatch(setLoading());
   return dbCreateProfile(name, username).then((profile) => {
     dispatch(receiveProfile(profile));
-    return dispatch(setHasProfile(true));
+    return dispatch(finishCreatingProfile());
+  });
+};
+
+const readyToStart = () => ({ type: "ready_to_start" });
+
+export const dismissDavid = () => (dispatch) => {
+  dispatch(setLoading());
+  return dispatch(readyToStart());
+};
+
+export const addDavid = () => (dispatch) => {
+  dispatch(setLoading());
+  return connectWithDavid().then(() => {
+    dispatch({
+      type: "create_profile_connection",
+      payload: { username: "david" },
+    });
+    dispatch(readyToStart());
   });
 };

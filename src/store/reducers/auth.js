@@ -5,6 +5,7 @@ const initialState = {
   suggestion: "",
   displayName: "",
   hasProfile: false,
+  isBrandNew: false,
 };
 
 export default function auth(state = initialState, action) {
@@ -24,6 +25,7 @@ export default function auth(state = initialState, action) {
         suggestion,
         displayName,
         hasProfile,
+        isBrandNew: false,
       };
     }
     case "sign_out": {
@@ -32,12 +34,19 @@ export default function auth(state = initialState, action) {
         loading: false,
       };
     }
-    case "set_has_profile": {
-      const { hasProfile } = action.payload;
+    case "finish_creating_profile": {
       return {
         ...state,
-        hasProfile,
         loading: false,
+        hasProfile: true,
+        isBrandNew: true,
+      };
+    }
+    case "ready_to_start": {
+      return {
+        ...state,
+        loading: false,
+        isBrandNew: false,
       };
     }
     default:

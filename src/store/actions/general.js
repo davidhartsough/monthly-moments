@@ -28,7 +28,6 @@ export const acceptRequest = (username) => (dispatch) => {
   return new Promise((resolve, reject) => {
     return dbAcceptRequest(username)
       .then((person) => {
-        console.log(person);
         dispatch(_acceptRequest(username));
         dispatch(_deleteRequest(username));
         dispatch(_deleteProfileRequest(username));

@@ -12,9 +12,6 @@ ol {
   justify-content: space-around;
   align-items: center;
 }
-.intro-actions button {
-  margin-left: 0.25rem;
-}
 .helper {
   font-size: 0.875rem;
   line-height: 1;

@@ -217,3 +217,12 @@ textarea {
     display: inline;
   }
 }
+.dark .mdl-textfield__input,
+.dark .firebaseui-input {
+  color: rgba(0, 0, 0, 0.87);
+  fill: rgba(0, 0, 0, 0.87);
+}
+.mdl-textfield__label,
+.firebaseui-label {
+  margin: 0;
+}
