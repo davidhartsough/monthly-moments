@@ -1,8 +1,8 @@
 import React from "react";
 import Loader from "./Loader";
 import { getTheme } from "../../theme";
-import BlueLogo from "./logo-blue.svg";
-import WhiteLogo from "./logo-white.svg";
+import BlueLogo from "./logo-blue.png";
+import WhiteLogo from "./logo-white.png";
 import "./Splash.css";
 
 export default () => (
