@@ -121,7 +121,7 @@ export function getPeopleByQuery(query) {
     .get()
     .then(({ docs }) => docs.map(mapDocs))
     .catch((err) =>
-      console.warn(`Error getting moments by query ("${query}") : `, err)
+      console.warn(`Error getting people by query ("${query}") : `, err)
     );
 }
 
@@ -135,6 +135,7 @@ export function getThisMonthsMoments() {
     .collection("moments")
     .where("uid", "==", _uid)
     .where("month", "==", currentMonth)
+    .orderBy("timestamp")
     .get()
     .then(({ docs }) => docs.map(mapDocs))
     .catch((e) => console.warn("Error getting this month's moments: ", e));
@@ -146,6 +147,7 @@ export function getRecap(month, uid) {
     .collection("moments")
     .where("uid", "==", auid)
     .where("month", "==", month)
+    .orderBy("timestamp")
     .get()
     .then(({ docs }) => docs.map(mapDocs))
     .catch((e) =>
@@ -162,6 +164,7 @@ export function createMoment(text) {
     month: currentMonth,
     username: _username,
     text,
+    timestamp: firebase.firestore.Timestamp.now().seconds,
   };
   return _db
     .collection("moments")
